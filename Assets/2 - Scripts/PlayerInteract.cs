@@ -16,6 +16,7 @@ public class PlayerInteract : MonoBehaviour
     void TryPickupItem()
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickupRange, Color.red);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, pickupRange))

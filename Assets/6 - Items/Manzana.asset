@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Manzana
   icon: {fileID: 21300000, guid: 8e25dda6d5f05e542a8a782f65c71e51, type: 3}
   description: Frutas
-  price: 2.99
+  price: 3

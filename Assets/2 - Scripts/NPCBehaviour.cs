@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class NPCBehaviour : MonoBehaviour
 {
     #region Variables
-    NavMeshAgent npcAgent;
+    [HideInInspector] public NavMeshAgent npcAgent;
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] NPC_STATE currentState;
     //Animator npcAnim;
