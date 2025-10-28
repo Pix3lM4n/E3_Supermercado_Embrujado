@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Boss
   - Client
+  - Product
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - InteractionLayer
   - Water
   - UI
   - 

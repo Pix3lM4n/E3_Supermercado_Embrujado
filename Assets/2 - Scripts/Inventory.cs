@@ -16,4 +16,8 @@ public class Inventory : MonoBehaviour
         items.Add(item);
         Debug.Log("Picked up: " + item.itemName);
     }
+    public void RemoveItem(ItemData item)
+    {
+        items.Remove(item);
+    }
 }

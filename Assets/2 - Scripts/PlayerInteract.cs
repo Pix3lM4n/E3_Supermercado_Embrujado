@@ -4,12 +4,22 @@ public class PlayerInteract : MonoBehaviour
 {
     public float pickupRange = 3f;
     public Transform playerCamera;
+    public Transform grabbedTransform;
+    public Transform playerHands;
+    public LayerMask interactionLayer;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            TryPickupItem();
+            if (grabbedTransform != null)
+            {
+                ReleaseTransform();
+            }
+            else
+            {
+                TryPickupItem();
+            }
         }
     }
 
@@ -19,14 +29,28 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawRay(playerCamera.position, playerCamera.forward * pickupRange, Color.red);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, pickupRange))
+        if (Physics.Raycast(ray, out hit, pickupRange, interactionLayer))
         {
             ItemPickup item = hit.transform.GetComponent<ItemPickup>();
             if (item != null)
             {
-                Inventory.instance.AddItem(item.itemData);
-                Destroy(item.gameObject);
+                GrabTransform(hit.transform);
             }
         }
+    }
+
+    void GrabTransform(Transform transformToGrab)
+    {
+        grabbedTransform = transformToGrab;
+        grabbedTransform.SetParent(playerHands);
+        grabbedTransform.localPosition = Vector3.zero;
+        grabbedTransform.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    void ReleaseTransform()
+    {
+        grabbedTransform.GetComponent<Rigidbody>().isKinematic = false;
+        grabbedTransform.SetParent(null);
+        grabbedTransform = null;
     }
 }

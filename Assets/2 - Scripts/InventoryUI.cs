@@ -8,7 +8,7 @@ public class InventoryUI : MonoBehaviour
 
     void Update()
     {
-        //inventoryText.text = "Carrito:\n";
+        inventoryText.text = "Carrito:\n";
         foreach (ItemData item in Inventory.instance.items)
         {
             inventoryText.text += "- " + item.itemName + "\n";
