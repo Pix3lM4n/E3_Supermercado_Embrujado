@@ -9,6 +9,21 @@ public class CartScript : MonoBehaviour
         {
             Inventory.instance.AddItem(item.itemData);
             item.isInCart = true;
+            switch (item.itemData.description)
+            {
+                case "Frutas":
+                    GameMaster.Instance.appleCounter++;
+                    break;
+                case "Carnes":
+                    GameMaster.Instance.meatCounter++;
+                    break;
+                case "Lacteos":
+                    GameMaster.Instance.milkCounter++;
+                    break;
+                case "Panaderia":
+                    GameMaster.Instance.cookieCounter++;
+                    break;
+            }
 
             Debug.Log($"Added {item.itemData.itemName} to cart");
         }
@@ -21,6 +36,21 @@ public class CartScript : MonoBehaviour
         {
             Inventory.instance.RemoveItem(item.itemData);
             item.isInCart = false;
+            switch (item.itemData.description)
+            {
+                case "Frutas":
+                    GameMaster.Instance.appleCounter--;
+                    break;
+                case "Carnes":
+                    GameMaster.Instance.meatCounter--;
+                    break;
+                case "Lacteos":
+                    GameMaster.Instance.milkCounter--;
+                    break;
+                case "Panaderia":
+                    GameMaster.Instance.cookieCounter--;
+                    break;
+            }
 
             Debug.Log($"Removed {item.itemData.itemName} from cart");
         }
