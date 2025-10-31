@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
     [TextArea] public string npcDialogue;
 
     [Header("Detection")]
-    [SerializeField] bool isPlayerOnTrigger;
+    [SerializeField] bool isPlayerOnBoss, isPlayerOnClient;
 
     NPCBehaviour npcBehaviour;
     PlayerMovement playerMovement;
@@ -44,29 +44,34 @@ public class DialogueManager : MonoBehaviour
     }
     void Update()
     {
-        if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E) && gameObject.tag == "Boss")
+        if (isPlayerOnBoss == true && Input.GetKeyDown(KeyCode.E) && gameObject.CompareTag("Boss"))
         {
             if (GameMaster.Instance.isListCorrect == 1)
             {
                 GameMaster.Instance.listType = 4;
+                BossTalk();
             }
             else if(GameMaster.Instance.isListCorrect == 2)
             {
                 GameMaster.Instance.listType = 5;
+                BossTalk();
             }
-            BossTalk();
+            else
+            {
+                BossTalk();
+            }
         }
         
-        if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E) && gameObject.tag == "Client")
+        if (isPlayerOnClient == true && Input.GetKeyDown(KeyCode.E) && gameObject.CompareTag("Client"))
         {
             ShowBoxes();
             ClientTalk();
         }
-        else if (Input.GetKeyDown(KeyCode.E) && isTypeWriterFinished == true && gameObject.tag == "Client")
+        else if (Input.GetKeyDown(KeyCode.E) && isTypeWriterFinished == true && gameObject.CompareTag("Client"))
         {
             HideBoxes();
             npcBehaviour.npcAgent.isStopped = false;
-            isPlayerOnTrigger = true;
+            isPlayerOnClient = true;
             playerMovement.moveSpeed = 5f;
             StopCoroutine("TypeWriter");
             isTypeWriterFinished = false;
@@ -75,11 +80,25 @@ public class DialogueManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        isPlayerOnTrigger = true;
+        if (gameObject.CompareTag("Boss"))
+        {
+            isPlayerOnBoss = true;
+        }
+        else if (gameObject.CompareTag("Client"))
+        {
+            isPlayerOnClient = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        isPlayerOnTrigger = false;
+        if (gameObject.CompareTag("Boss"))
+        {
+            isPlayerOnBoss = false;
+        }
+        else if (gameObject.CompareTag("Client"))
+        {
+            isPlayerOnClient = false;
+        }
     }
     void BossTalk() //~3:50 AM. Se que es confuso, problablemente ineficiente y de que haya una mejor manera de hacerlo, pero funciona
     {
@@ -275,7 +294,7 @@ public class DialogueManager : MonoBehaviour
     void ClientTalk()
     {
         npcBehaviour.npcAgent.isStopped = true;
-        isPlayerOnTrigger = false;
+        isPlayerOnClient = false;
         playerMovement.moveSpeed = 0f;
         nameText.text = "Cliente";
         StartCoroutine("TypeWriter");

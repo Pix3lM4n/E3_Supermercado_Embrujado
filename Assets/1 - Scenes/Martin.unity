@@ -1491,7 +1491,6 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 8
-  item: {fileID: 0}
 --- !u!136 &273232493
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1582,7 +1581,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1982778726}
-  - {fileID: 1628313959}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &273232497
@@ -2061,7 +2059,7 @@ Transform:
   m_GameObject: {fileID: 463145106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8218558, y: 0, z: -4.8802514}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2115,6 +2113,7 @@ MonoBehaviour:
   meatSpawn: {fileID: 25319720}
   milkSpawn: {fileID: 1883912872}
   cookieSpawn: {fileID: 7281402}
+  itemPickup: {fileID: 0}
 --- !u!1 &492534129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,10 +2298,10 @@ GameObject:
   - component: {fileID: 555446092}
   - component: {fileID: 555446091}
   - component: {fileID: 555446090}
-  - component: {fileID: 555446089}
-  - component: {fileID: 555446096}
   - component: {fileID: 555446088}
   - component: {fileID: 555446095}
+  - component: {fileID: 555446089}
+  - component: {fileID: 555446096}
   m_Layer: 0
   m_Name: Customer 4
   m_TagString: Client
@@ -3062,10 +3061,10 @@ GameObject:
   - component: {fileID: 862203651}
   - component: {fileID: 862203650}
   - component: {fileID: 862203649}
-  - component: {fileID: 862203648}
-  - component: {fileID: 862203655}
   - component: {fileID: 862203647}
   - component: {fileID: 862203654}
+  - component: {fileID: 862203648}
+  - component: {fileID: 862203655}
   m_Layer: 0
   m_Name: Customer 3
   m_TagString: Client
@@ -5096,12 +5095,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628313958}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.56, y: 0.22, z: -0.49}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.76, y: -0.98, z: -0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 273232496}
+  m_Father: {fileID: 1982778726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1648984167
 GameObject:
@@ -5717,10 +5716,10 @@ GameObject:
   - component: {fileID: 1900617289}
   - component: {fileID: 1900617288}
   - component: {fileID: 1900617287}
-  - component: {fileID: 1900617286}
-  - component: {fileID: 1900617293}
   - component: {fileID: 1900617285}
   - component: {fileID: 1900617292}
+  - component: {fileID: 1900617286}
+  - component: {fileID: 1900617293}
   m_Layer: 0
   m_Name: Customer 2
   m_TagString: Client
@@ -6241,7 +6240,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1628313959}
   m_Father: {fileID: 273232496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1982778727

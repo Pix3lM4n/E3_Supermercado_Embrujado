@@ -9,7 +9,7 @@ public class GameMaster : MonoBehaviour
     #region Variables
     [Header("List Variables")]
     public int isListCorrect; //0 = normal, 1 = list is correct, 2 = list is wrong
-    [HideInInspector] public int listType;
+    public int listType;
 
     [Header("Item Counters")]
     public float appleCounter;
@@ -43,6 +43,8 @@ public class GameMaster : MonoBehaviour
     public Transform milkSpawn;
     public Transform cookieSpawn;
     PlayerInteract playerInteract;
+    public ItemPickup itemPickup;
+    bool itemSpawned;
     #endregion
 
     private void Awake()
@@ -95,11 +97,19 @@ public class GameMaster : MonoBehaviour
 
         if (playerInteract.grabbedTransform != null)
         {
-            switch (playerInteract.item.gameObject.tag)
+            switch (itemPickup.gameObject.tag)
             {
                 case "Apple":
-                    applePFClone = Instantiate(applePF, appleSpawn);
-                    break;
+                    if (itemSpawned == false)
+                    {
+                        applePFClone = Instantiate(applePF, appleSpawn);
+                        itemSpawned = true;
+                    }
+                    else
+                    {
+                        print("Apple spawned");
+                    }
+                        break;
                 case "Meat":
                     meatPFClone = Instantiate(meatPF, meatSpawn);
                     break;

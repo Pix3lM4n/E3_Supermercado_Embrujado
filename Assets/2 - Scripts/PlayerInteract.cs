@@ -8,17 +8,10 @@ public class PlayerInteract : MonoBehaviour
     public Transform playerHands;
     public LayerMask interactionLayer;
 
-    [HideInInspector] public ItemPickup item;
-    [HideInInspector] public RaycastHit hit;
-
-    private void Start()
-    {
-        item = hit.transform.GetComponent<ItemPickup>();
-    }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickupRange, Color.red);
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (grabbedTransform != null)
             {
@@ -34,10 +27,14 @@ public class PlayerInteract : MonoBehaviour
     void TryPickupItem()
     {
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
         if (Physics.Raycast(ray, out hit, pickupRange, interactionLayer))
         {
+            ItemPickup item = hit.transform.GetComponent<ItemPickup>();
             if (item != null)
             {
+                GameMaster.Instance.itemPickup = item;
                 GrabTransform(hit.transform);
             }
         }
