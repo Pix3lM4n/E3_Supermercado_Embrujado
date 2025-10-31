@@ -6,49 +6,110 @@ public class GameMaster : MonoBehaviour
 {
     public static GameMaster Instance;
 
-    [SerializeField] bool isListCorrect; //False = list is wrong, true = list is correct
+    #region Variables
+    [Header("List Variables")]
+    public int isListCorrect; //0 = normal, 1 = list is correct, 2 = list is wrong
     [HideInInspector] public int listType;
-    public float appleCounter, milkCounter, meatCounter, cookieCounter;
-    public TextMeshProUGUI item1, item2, item3, item4;
-    public ItemData appleItem, meatItem, milkItem, cookieItem;
+
+    [Header("Item Counters")]
+    public float appleCounter;
+    public float milkCounter;
+    public float meatCounter;
+    public float cookieCounter;
+
+    [Header("UI")]
+    public Image listBox;
+    public TextMeshProUGUI listText;
     public Image voucherBox;
+    public TextMeshProUGUI voucherText;
+    public bool isVoucherShown;
+
+    [Header("Item Data")]
+    public ItemData appleData;
+    public ItemData meatData;
+    public ItemData milkData;
+    public ItemData cookieData;
+
+    [Header("Prefabs")]
+    public GameObject applePF;
+    public GameObject meatPF;
+    public GameObject milkPF;
+    public GameObject cookiePF;
+
+    [Header("Spawn")]
+    [HideInInspector] GameObject applePFClone, meatPFClone, milkPFClone, cookiePFClone;
+    public Transform appleSpawn;
+    public Transform meatSpawn;
+    public Transform milkSpawn;
+    public Transform cookieSpawn;
+    PlayerInteract playerInteract;
+    #endregion
 
     private void Awake()
     {
         Instance = this;
+        playerInteract = FindFirstObjectByType<PlayerInteract>();
     }
     private void Start()
     {
         voucherBox.enabled = false;
+        listBox.enabled = false;
+
+        listText.enabled = false;
+        voucherText.enabled = false;
+
         ListRandomizer();
         switch (listType)
         {
             case 1:
-                item1.text = "Manzana";
-                item2.text = "Carne x3";
-                item3.text = "Leche";
-                item4.text = null;
+                listText.text = "Manzana" + "\n" + "Carne x3" + "\n" + "Leche";
                 break;
             case 2:
-                item1.text = "Manzana x2";
-                item2.text = "Carne";
-                item3.text = "Leche x3";
-                item4.text = "Galleta";
+                listText.text = "Manzana x2" + "\n" + "Carne" + "\n" + "Leche x3" + "\n" + "Galleta";
                 break;
             case 3:
-                item1.text = "Manzana x3";
-                item2.text = null;
-                item3.text = null;
-                item4.text = null;
+                listText.text = "Manzana x3";
                 break;
         }
+
+        applePFClone = Instantiate(applePF, appleSpawn);
+        meatPFClone = Instantiate(meatPF, meatSpawn);
+        milkPFClone = Instantiate(milkPF, milkSpawn);
+        cookiePFClone = Instantiate(cookiePF, cookieSpawn);
     }
     private void Update()
     {
-        listType = Random.Range(1, 4); // 1-3 range
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.L)) //Open list panel
         {
-            CheckList();
+            if (listBox.enabled == false)
+            {
+                listBox.enabled = true;
+                listText.enabled = true;
+            }
+            else
+            {
+                listBox.enabled = false;
+                listText.enabled = false;
+            }
+        }
+
+        if (playerInteract.grabbedTransform != null)
+        {
+            switch (playerInteract.item.gameObject.tag)
+            {
+                case "Apple":
+                    applePFClone = Instantiate(applePF, appleSpawn);
+                    break;
+                case "Meat":
+                    meatPFClone = Instantiate(meatPF, meatSpawn);
+                    break;
+                case "Milk":
+                    milkPFClone = Instantiate(milkPF, milkSpawn);
+                    break;
+                case "Cookie":
+                    cookiePFClone = Instantiate(cookiePF, cookieSpawn);
+                    break;
+            }
         }
     }
     void CheckList() //Use with cart script to check how many items there are
@@ -58,42 +119,61 @@ public class GameMaster : MonoBehaviour
             case 1:
                 if (appleCounter == 1 && meatCounter == 3 && milkCounter == 1)
                 {
-                    isListCorrect = true;
+                    isListCorrect = 1;
                 }
-                break;
+                else
+                {
+                    isListCorrect = 2;
+                }
+                    break;
             case 2:
                 if (appleCounter == 2 && meatCounter == 1 && milkCounter == 3 && cookieCounter == 1)
                 {
-                    isListCorrect = true;
+                    isListCorrect = 1;
                 }
-                break;
+                else
+                {
+                    isListCorrect = 2;
+                }
+                    break;
             case 3:
                 if (appleCounter == 3)
                 {
-                    isListCorrect = true;
+                    isListCorrect = 1;
+                }
+                else
+                {
+                    isListCorrect = 2;
                 }
                 break;
         }
     }
-    void Pay() //Func gets called at checkout
+    public void Pay() //Func gets called at checkout
     {
         //float applePrice = appleItem.price * appleCounter;
         //float meatPrice = meatItem.price * meatCounter;
         //float milkPrice = milkItem.price * milkCounter;
         //float cookiPrice = cookieItem.price * cookieCounter;
 
-        float subTotalPrice = (appleItem.price * appleCounter) + (milkItem.price * milkCounter) + (cookieItem.price * cookieCounter) + (meatItem.price * meatCounter);
-
-        float totalDiscounts = (milkItem.price * milkCounter) + (cookieItem.price * cookieCounter) * 2f + (meatItem.price * meatCounter) * 0.5f;
-
+        float subTotalPrice = (appleData.price * appleCounter) + (milkData.price * milkCounter) + (cookieData.price * cookieCounter) + (meatData.price * meatCounter);
+        float totalDiscounts = (milkData.price * milkCounter) + (cookieData.price * cookieCounter) * 2f + (meatData.price * meatCounter) * 0.5f;
         float totalToPay = subTotalPrice - totalDiscounts;
+
+        if (isVoucherShown == true)
+        {
+            voucherBox.enabled = true;
+            voucherText.text = "=Articulos=" + "\n" + "Manzana: " + appleCounter + appleData.price + "\n" + "Leche: " + milkCounter + milkData.price + "\n" + "Carne: " + meatCounter + meatData.price + "\n" +
+                "Galleta: " + cookieCounter + cookieData.price + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "$ " + totalToPay;
+        }
+        
+        if (isVoucherShown == false)
+        {
+            voucherBox.enabled = false;
+            voucherText.text = null;
+        }
     }
     void ListRandomizer()
     {
         listType = Random.Range(1, 4); // 1-3 range
-    }
-    void OpenVoucher() //Add text to this func
-    {
-        voucherBox.enabled = true;
     }
 }
