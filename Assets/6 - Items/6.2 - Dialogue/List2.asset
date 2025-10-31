@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa80a9739300e2f4187d93a861c70a1b, type: 3}
-  m_Name: InitialConvo
+  m_Name: List2
   m_EditorClassIdentifier: 
   bossDialogue:
   - characterName: Jefe
     characterPhrase: "Oye, necesito que vayas a comprar lo siguiente. Escucha bien,
       te lo dir\xE9 una vez."
   - characterName: Jefe
-    characterPhrase: 
+    characterPhrase: Necesito dos manzanas, una carne, tres leches y una galleta.
   - characterName: Jefe
     characterPhrase: "Eso es todo, en cuanto termines la compra, ven aqu\xED y la
-      revisar\xE9"
+      revisar\xE9."

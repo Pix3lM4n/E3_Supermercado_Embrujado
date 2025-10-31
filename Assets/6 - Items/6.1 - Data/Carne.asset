@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20101aa81a133b64889b247dd19d0510, type: 3}
-  m_Name: Manzana
+  m_Name: Carne
   m_EditorClassIdentifier: 
-  itemName: Manzana Agusanada
-  icon: {fileID: 21300000, guid: 8e25dda6d5f05e542a8a782f65c71e51, type: 3}
-  description: Frutas
-  price: 3
+  itemName: Carne Podrida
+  icon: {fileID: 0}
+  description: Carnes
+  price: 5
