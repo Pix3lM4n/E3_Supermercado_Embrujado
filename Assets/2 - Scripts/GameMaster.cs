@@ -1,4 +1,4 @@
-using System.Runtime.CompilerServices;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,6 +44,12 @@ public class GameMaster : MonoBehaviour
     public Transform milkSpawn;
     public Transform cookieSpawn;
     PlayerInteract playerInteract;
+
+    string npcDialogue;
+    TextMeshProUGUI dialogueText;
+    float writingSpeed;
+    bool isTypeWriterFinished;
+
     #endregion
 
     private void Awake()
@@ -100,15 +106,19 @@ public class GameMaster : MonoBehaviour
         {
             case "Apple":
                 applePFClone = Instantiate(applePF, appleSpawn);
+                print("Spawned apple");
                 break;
             case "Meat":
                 meatPFClone = Instantiate(meatPF, meatSpawn);
+                print("Spawned meat");
                 break;
             case "Milk":
                 milkPFClone = Instantiate(milkPF, milkSpawn);
+                print("Spawned milk");
                 break;
             case "Cookie":
                 cookiePFClone = Instantiate(cookiePF, cookieSpawn);
+                print("Spawned cookie");
                 break;
         }
     }
@@ -150,20 +160,26 @@ public class GameMaster : MonoBehaviour
     }
     public void Pay() //Func gets called at checkout
     {
-        //float applePrice = appleItem.price * appleCounter;
-        //float meatPrice = meatItem.price * meatCounter;
-        //float milkPrice = milkItem.price * milkCounter;
-        //float cookiPrice = cookieItem.price * cookieCounter;
+        float applePrice = appleData.price * appleCounter;
+        float meatPrice = meatData.price * meatCounter;
+        float milkPrice = milkData.price * milkCounter;
+        float cookiePrice = cookieData.price * cookieCounter;
 
-        float subTotalPrice = (appleData.price * appleCounter) + (milkData.price * milkCounter) + (cookieData.price * cookieCounter) + (meatData.price * meatCounter);
-        float totalDiscounts = (milkData.price * milkCounter) + (cookieData.price * cookieCounter) * 2f + (meatData.price * meatCounter) * 0.5f;
+        float subTotalPrice = applePrice + meatPrice + milkPrice + cookiePrice;
+        float totalDiscounts = (milkData.price * milkCounter) + (meatData.price * meatCounter) * 0.5f + (cookieData.price* cookieCounter) * 2f;
         float totalToPay = subTotalPrice - totalDiscounts;
 
         if (isVoucherShown == true)
         {
             voucherBox.enabled = true;
-            voucherText.text = "=Articulos=" + "\n" + "Manzana: " + appleCounter + appleData.price + "\n" + "Leche: " + milkCounter + milkData.price + "\n" + "Carne: " + meatCounter + meatData.price + "\n" +
-                "Galleta: " + cookieCounter + cookieData.price + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "$ " + totalToPay;
+            voucherText.enabled = true;
+            voucherText.text = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + applePrice + "\n" + "Leche: " + milkData.description + " - "+ milkPrice + "\n" + "Carne: " + meatData.description + " - " + meatPrice
+                + "\n" + "Galleta: " + cookieData.description + " - " + cookiePrice + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "\n" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "\n" + "$ " + totalToPay;
+            CheckList();
+            Destroy(applePFClone.gameObject);
+            Destroy(meatPFClone.gameObject);
+            Destroy(milkPFClone.gameObject);
+            Destroy(cookiePFClone.gameObject);
         }
         
         if (isVoucherShown == false)
@@ -175,5 +191,14 @@ public class GameMaster : MonoBehaviour
     void ListRandomizer()
     {
         listType = Random.Range(1, 4); // 1-3 range
+    }
+    IEnumerator TypeWriter()
+    {
+        foreach (char character in npcDialogue)
+        {
+            dialogueText.text += character;
+            yield return new WaitForSeconds(writingSpeed);
+        }
+        isTypeWriterFinished = true;
     }
 }

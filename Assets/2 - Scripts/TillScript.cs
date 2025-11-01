@@ -16,8 +16,8 @@ public class TillScript : MonoBehaviour
             print("Show voucher");
             playerMovement.moveSpeed = 0f;
             GameMaster.Instance.isVoucherShown = true;
-            GameMaster.Instance.Pay();
             isPlayerOnTrigger = false;
+            GameMaster.Instance.Pay();
         }
         else if (GameMaster.Instance.isVoucherShown == true && Input.GetKeyDown(KeyCode.E))
         {
@@ -41,11 +41,4 @@ public class TillScript : MonoBehaviour
             isPlayerOnTrigger = false;
         }
     }
-
-    #region Stash
-    //No se usan, pero pueden ser utiles
-
-    //playerRB.constraints = RigidbodyConstraints.FreezePosition | playerRB.constraints; //Combina los constraints existentes con los de posicion
-    //playerRB.constraints &= ~(RigidbodyConstraints.FreezePosition); //Revierte la funcion RigidbodyConstraints.FreezePosition, por lo tanto le dice que NO congele las posiciones y mantiene los constraints previos
-    #endregion
 }

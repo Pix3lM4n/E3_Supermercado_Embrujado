@@ -7,11 +7,12 @@ public class PlayerInteract : MonoBehaviour
     public Transform grabbedTransform;
     public Transform playerHands;
     public LayerMask interactionLayer;
+    public int itemCounter;
 
     void Update()
     {
         Debug.DrawRay(playerCamera.position, playerCamera.forward * pickupRange, Color.red);
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (grabbedTransform != null)
             {
@@ -31,7 +32,12 @@ public class PlayerInteract : MonoBehaviour
         if (Physics.Raycast(ray, out hit, pickupRange, interactionLayer))
         {
             ItemPickup item = hit.transform.GetComponent<ItemPickup>();
-            GameMaster.Instance.RespawnItem(item.gameObject.tag);
+            if (itemCounter < 10)
+            {
+                itemCounter++;
+                GameMaster.Instance.RespawnItem(item.gameObject.tag);
+            }
+
             if (item != null)
             {
                 GrabTransform(hit.transform);

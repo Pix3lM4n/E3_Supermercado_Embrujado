@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Carne Podrida
   icon: {fileID: 0}
-  description: Un corte de carne
-  price: 5
+  description: Carnes
+  price: 6

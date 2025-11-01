@@ -14,9 +14,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Conversation Flow")]
     public float writingSpeed;
+    bool isDialogueStarted, isClientTalking;
     [SerializeField] bool isTypeWriterFinished;
-    bool isDialogueStarted;
-    bool isInDialogue;
     int dialogueIndex;
 
     [Header("Conversation")]
@@ -32,60 +31,55 @@ public class DialogueManager : MonoBehaviour
 
     NPCBehaviour npcBehaviour;
     PlayerMovement playerMovement;
+    SceneMaster sceneMaster;
     #endregion
 
     void Awake()
     {
         npcBehaviour = GetComponent<NPCBehaviour>();
+        sceneMaster = FindFirstObjectByType<SceneMaster>();
         playerMovement = FindFirstObjectByType<PlayerMovement>();
     }
     void Start()
     {
         HideBoxes();
     }
-    void Update() //Quiza dividir esto en varios ifs ayude
+    void Update()
     {
-        if (isPlayerOnTrigger == true)
+        if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E) && isInDialogue == false) //Starting dialogue
+            if (gameObject.CompareTag("Boss")) //Checks for either boss or client
             {
-                if (gameObject.CompareTag("Boss")) //Checks for either boss or client
+                if (GameMaster.Instance.isListCorrect == 1)
                 {
-                    if (GameMaster.Instance.isListCorrect == 1)
-                    {
-                        GameMaster.Instance.listType = 4;
-                    }
-                    else if (GameMaster.Instance.isListCorrect == 2)
-                    {
-                        GameMaster.Instance.listType = 5;
-                    }
-                    isInDialogue = true;
+                    GameMaster.Instance.listType = 4;
+                    BossTalk();
+                    sceneMaster.ChangeScene(GameMaster.Instance.isListCorrect);
+                }
+                else if (GameMaster.Instance.isListCorrect == 2)
+                {
+                    GameMaster.Instance.listType = 5;
+                    BossTalk();
+                    sceneMaster.ChangeScene(GameMaster.Instance.isListCorrect);
+                }
+                else
+                {
                     BossTalk();
                 }
-                else if (gameObject.CompareTag("Client"))
+            }
+            else if (gameObject.CompareTag("Client"))
+            {
+                if(isClientTalking == false)
                 {
-                    isInDialogue = true; 
                     ShowBoxes();
                     ClientTalk();
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && isInDialogue == true)
-            {
-                if (isTypeWriterFinished == true)
+                else if (isClientTalking == true)
                 {
-                    if (gameObject.CompareTag("Boss"))
-                    {
-                        BossTalk();
-                    }
-                    else if (gameObject.CompareTag("Client"))
-                    {
-                        HideBoxes();
-                        npcBehaviour.npcAgent.isStopped = false;
-                        playerMovement.moveSpeed = 5f;
-                        StopCoroutine("TypeWriter");
-                        isTypeWriterFinished = false;
-                        isInDialogue = false;
-                    }
+                    HideBoxes();
+                    isClientTalking = false;
+                    npcBehaviour.npcAgent.isStopped = false;
+                    playerMovement.moveSpeed = 5f;
                 }
             }
         }
@@ -98,7 +92,7 @@ public class DialogueManager : MonoBehaviour
     {
         isPlayerOnTrigger = false;
     }
-    void BossTalk() //~3:50 AM. Se que es confuso, problablemente ineficiente y de que haya una mejor manera de hacerlo, pero funciona
+    void BossTalk() //~4:00 AM. No es lo que queria, pero funciona
     {
         if (isDialogueStarted == true)
         {
@@ -107,180 +101,70 @@ public class DialogueManager : MonoBehaviour
                 case 1:
                     if (dialogueIndex < list1Dialogue.bossDialogue.Length - 1)
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            dialogueIndex++;
-                            RefreshText();
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list1Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
+                        dialogueIndex++;
+                        RefreshText();
                     }
                     else //No more dialogue
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            HideBoxes();
-                            dialogueIndex = 0;
-                            isDialogueStarted = false;
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list1Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
-                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
                 case 2:
                     if (dialogueIndex < list2Dialogue.bossDialogue.Length - 1)
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            dialogueIndex++;
-                            RefreshText();
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list2Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
+                        dialogueIndex++;
+                        RefreshText();
                     }
                     else //No more dialogue
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            HideBoxes();
-                            dialogueIndex = 0;
-                            isDialogueStarted = false;
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list2Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
-                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
                 case 3:
                     if (dialogueIndex < list3Dialogue.bossDialogue.Length - 1)
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            dialogueIndex++;
-                            RefreshText();
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list3Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
+                        dialogueIndex++;
+                        RefreshText();
                     }
                     else //No more dialogue
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            HideBoxes();
-                            dialogueIndex = 0;
-                            isDialogueStarted = false;
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = list3Dialogue.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
-                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
                 case 4:
                     if (dialogueIndex < correctList.bossDialogue.Length - 1)
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            dialogueIndex++;
-                            RefreshText();
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = correctList.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
+                        dialogueIndex++;
+                        RefreshText();
                     }
                     else //No more dialogue
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            HideBoxes();
-                            dialogueIndex = 0;
-                            isDialogueStarted = false;
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = correctList.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
-                        isInDialogue = false; //Maybe change because of scene change?
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
                 case 5:
                     if (dialogueIndex < wrongList.bossDialogue.Length - 1)
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            dialogueIndex++;
-                            RefreshText();
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = wrongList.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
+                        dialogueIndex++;
+                        RefreshText();
                     }
                     else //No more dialogue
                     {
-                        if (isTypeWriterFinished == true)
-                        {
-                            HideBoxes();
-                            dialogueIndex = 0;
-                            isDialogueStarted = false;
-                        }
-                        else
-                        {
-                            StopCoroutine("TypeWriter");
-                            dialogueText.text = wrongList.bossDialogue[dialogueIndex].characterPhrase;
-                            isTypeWriterFinished = true;
-                        }
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
-                        isInDialogue = false; //Read final statement fot case 4
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -297,34 +181,35 @@ public class DialogueManager : MonoBehaviour
     void ClientTalk()
     {
         npcBehaviour.npcAgent.isStopped = true;
-        //isPlayerOnTrigger = false;
         playerMovement.moveSpeed = 0f;
         nameText.text = "Cliente";
-        StartCoroutine("TypeWriter");
-        //if (isTypeWriterFinished == true)
-        //{
-        //    StopCoroutine("TypeWriter");
-        //}
+        dialogueText.text = npcDialogue;
+        isClientTalking = true;
     }
     void RefreshText()
     {
-        if (gameObject.tag == "Boss")
+        switch (GameMaster.Instance.listType)
         {
-            switch (GameMaster.Instance.listType)
-            {
-                case 1:
-                    nameText.text = list1Dialogue.bossDialogue[dialogueIndex].characterName;
-                    StartCoroutine("TypeWriter");
-                    break;
-                case 2:
-                    nameText.text = list2Dialogue.bossDialogue[dialogueIndex].characterName;
-                    StartCoroutine("TypeWriter");
-                    break;
-                case 3:
-                    nameText.text = list3Dialogue.bossDialogue[dialogueIndex].characterName;
-                    StartCoroutine("TypeWriter");
-                    break;
-            }
+            case 1:
+                nameText.text = list1Dialogue.bossDialogue[dialogueIndex].characterName;
+                dialogueText.text = list1Dialogue.bossDialogue[dialogueIndex].characterPhrase;
+                break;
+            case 2:
+                nameText.text = list2Dialogue.bossDialogue[dialogueIndex].characterName;
+                dialogueText.text = list2Dialogue.bossDialogue[dialogueIndex].characterPhrase;
+                break;
+            case 3:
+                nameText.text = list3Dialogue.bossDialogue[dialogueIndex].characterName;
+                dialogueText.text = list3Dialogue.bossDialogue[dialogueIndex].characterPhrase;
+                break;
+            case 4:
+                nameText.text = correctList.bossDialogue[dialogueIndex].characterName;
+                dialogueText.text = correctList.bossDialogue[dialogueIndex].characterPhrase;
+                break;
+            case 5:
+                nameText.text = wrongList.bossDialogue[dialogueIndex].characterName;
+                dialogueText.text = wrongList.bossDialogue[dialogueIndex].characterPhrase;
+                break;
         }
     }
     public void ShowBoxes()
@@ -339,48 +224,13 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = null;
         nameText.text = null;
     }
-    IEnumerator TypeWriter()
-    {
-        isTypeWriterFinished = false;
-        dialogueText.text = null;
-        if (gameObject.tag == "Boss")
-        {
-            switch (GameMaster.Instance.listType)
-            {
-                case 1:
-                    foreach (char character in list1Dialogue.bossDialogue[dialogueIndex].characterPhrase)
-                    {
-                        dialogueText.text += character;
-                        yield return new WaitForSeconds(writingSpeed);
-                    }
-                    isTypeWriterFinished = true;
-                    break;
-                case 2:
-                    foreach (char character in list2Dialogue.bossDialogue[dialogueIndex].characterPhrase)
-                    {
-                        dialogueText.text += character;
-                        yield return new WaitForSeconds(writingSpeed);
-                    }
-                    isTypeWriterFinished = true;
-                    break;
-                case 3:
-                    foreach (char character in list3Dialogue.bossDialogue[dialogueIndex].characterPhrase)
-                    {
-                        dialogueText.text += character;
-                        yield return new WaitForSeconds(writingSpeed);
-                    }
-                    isTypeWriterFinished = true;
-                    break;
-            }
-        }
-        else if (gameObject.tag == "Client")
-        {
-            foreach (char character in npcDialogue)
-            {
-                dialogueText.text += character;
-                yield return new WaitForSeconds(writingSpeed);
-            }
-            isTypeWriterFinished = true;
-        }
-    }
+    //IEnumerator TypeWriter()
+    //{
+    //    foreach (char character in npcDialogue)
+    //    {
+    //        dialogueText.text += character;
+    //        yield return new WaitForSeconds(writingSpeed);
+    //    }
+    //    isTypeWriterFinished = true;
+    //}
 }
