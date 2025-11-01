@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -92,24 +93,23 @@ public class GameMaster : MonoBehaviour
                 listText.enabled = false;
             }
         }
-
-        if (playerInteract.grabbedTransform != null)
+    }
+    public void RespawnItem(string itemTag)
+    {
+        switch (itemTag)
         {
-            switch (playerInteract.item.gameObject.tag)
-            {
-                case "Apple":
-                    applePFClone = Instantiate(applePF, appleSpawn);
-                    break;
-                case "Meat":
-                    meatPFClone = Instantiate(meatPF, meatSpawn);
-                    break;
-                case "Milk":
-                    milkPFClone = Instantiate(milkPF, milkSpawn);
-                    break;
-                case "Cookie":
-                    cookiePFClone = Instantiate(cookiePF, cookieSpawn);
-                    break;
-            }
+            case "Apple":
+                applePFClone = Instantiate(applePF, appleSpawn);
+                break;
+            case "Meat":
+                meatPFClone = Instantiate(meatPF, meatSpawn);
+                break;
+            case "Milk":
+                milkPFClone = Instantiate(milkPF, milkSpawn);
+                break;
+            case "Cookie":
+                cookiePFClone = Instantiate(cookiePF, cookieSpawn);
+                break;
         }
     }
     void CheckList() //Use with cart script to check how many items there are

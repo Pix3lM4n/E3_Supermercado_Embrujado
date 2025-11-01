@@ -8,6 +8,9 @@ TagManager:
   - Apple
   - Cookie
   - Milk
+  - Client
+  - Boss
+  - Till
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public float writingSpeed;
     [SerializeField] bool isTypeWriterFinished;
     bool isDialogueStarted;
+    bool isInDialogue;
     int dialogueIndex;
 
     [Header("Conversation")]
@@ -42,35 +43,51 @@ public class DialogueManager : MonoBehaviour
     {
         HideBoxes();
     }
-    void Update()
+    void Update() //Quiza dividir esto en varios ifs ayude
     {
-        if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E) && gameObject.tag == "Boss")
+        if (isPlayerOnTrigger == true)
         {
-            if (GameMaster.Instance.isListCorrect == 1)
+            if (Input.GetKeyDown(KeyCode.E) && isInDialogue == false) //Starting dialogue
             {
-                GameMaster.Instance.listType = 4;
+                if (gameObject.CompareTag("Boss")) //Checks for either boss or client
+                {
+                    if (GameMaster.Instance.isListCorrect == 1)
+                    {
+                        GameMaster.Instance.listType = 4;
+                    }
+                    else if (GameMaster.Instance.isListCorrect == 2)
+                    {
+                        GameMaster.Instance.listType = 5;
+                    }
+                    isInDialogue = true;
+                    BossTalk();
+                }
+                else if (gameObject.CompareTag("Client"))
+                {
+                    isInDialogue = true; 
+                    ShowBoxes();
+                    ClientTalk();
+                }
             }
-            else if(GameMaster.Instance.isListCorrect == 2)
+            else if (Input.GetKeyDown(KeyCode.E) && isInDialogue == true)
             {
-                GameMaster.Instance.listType = 5;
+                if (isTypeWriterFinished == true)
+                {
+                    if (gameObject.CompareTag("Boss"))
+                    {
+                        BossTalk();
+                    }
+                    else if (gameObject.CompareTag("Client"))
+                    {
+                        HideBoxes();
+                        npcBehaviour.npcAgent.isStopped = false;
+                        playerMovement.moveSpeed = 5f;
+                        StopCoroutine("TypeWriter");
+                        isTypeWriterFinished = false;
+                        isInDialogue = false;
+                    }
+                }
             }
-            BossTalk();
-        }
-        
-        if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E) && gameObject.tag == "Client")
-        {
-            ShowBoxes();
-            ClientTalk();
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && isTypeWriterFinished == true && gameObject.tag == "Client")
-        {
-            HideBoxes();
-            npcBehaviour.npcAgent.isStopped = false;
-            isPlayerOnTrigger = true;
-            playerMovement.moveSpeed = 5f;
-            StopCoroutine("TypeWriter");
-            isTypeWriterFinished = false;
-            print("No talking");
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -119,6 +136,7 @@ public class DialogueManager : MonoBehaviour
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
+                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -154,6 +172,7 @@ public class DialogueManager : MonoBehaviour
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
+                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -189,6 +208,7 @@ public class DialogueManager : MonoBehaviour
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
+                        isInDialogue = false;
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -224,6 +244,7 @@ public class DialogueManager : MonoBehaviour
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
+                        isInDialogue = false; //Maybe change because of scene change?
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -259,6 +280,7 @@ public class DialogueManager : MonoBehaviour
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
+                        isInDialogue = false; //Read final statement fot case 4
                         playerMovement.moveSpeed = 5f;
                     }
                     break;
@@ -275,15 +297,14 @@ public class DialogueManager : MonoBehaviour
     void ClientTalk()
     {
         npcBehaviour.npcAgent.isStopped = true;
-        isPlayerOnTrigger = false;
+        //isPlayerOnTrigger = false;
         playerMovement.moveSpeed = 0f;
         nameText.text = "Cliente";
         StartCoroutine("TypeWriter");
-        if (isTypeWriterFinished == true)
-        {
-            StopCoroutine("TypeWriter");
-        }
-        print("Talking");
+        //if (isTypeWriterFinished == true)
+        //{
+        //    StopCoroutine("TypeWriter");
+        //}
     }
     void RefreshText()
     {
