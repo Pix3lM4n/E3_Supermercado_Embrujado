@@ -45,11 +45,11 @@ public class GameMaster : MonoBehaviour
     public Transform cookieSpawn;
     PlayerInteract playerInteract;
 
-    string npcDialogue;
-    TextMeshProUGUI dialogueText;
-    float writingSpeed;
+    string voucherItems;
+    float writingSpeed = 0.01f;
     bool isTypeWriterFinished;
 
+    float applePrice, meatPrice, milkPrice, cookiePrice, totalDiscounts, subTotalPrice, totalToPay;
     #endregion
 
     private void Awake()
@@ -64,7 +64,9 @@ public class GameMaster : MonoBehaviour
 
         listText.enabled = false;
         voucherText.enabled = false;
-
+        voucherItems = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + applePrice + "\n" + "Leche: " + milkData.description + " - " + milkPrice + "\n" + "Carne: " + meatData.description + " - " + meatPrice
+                + "\n" + "Galleta: " + cookieData.description + " - " + cookiePrice + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "\n" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "\n" + "$ " + totalToPay;
+        //~3:30 AM. No es bueno ni pulcro, pero funciona
         ListRandomizer();
         switch (listType)
         {
@@ -98,6 +100,10 @@ public class GameMaster : MonoBehaviour
                 listBox.enabled = false;
                 listText.enabled = false;
             }
+        }
+        if (isTypeWriterFinished == true)
+        {
+            StopCoroutine("TypWriter");
         }
     }
     public void RespawnItem(string itemTag)
@@ -160,21 +166,20 @@ public class GameMaster : MonoBehaviour
     }
     public void Pay() //Func gets called at checkout
     {
-        float applePrice = appleData.price * appleCounter;
-        float meatPrice = meatData.price * meatCounter;
-        float milkPrice = milkData.price * milkCounter;
-        float cookiePrice = cookieData.price * cookieCounter;
+        applePrice = appleData.price * appleCounter;
+        meatPrice = meatData.price * meatCounter;
+        milkPrice = milkData.price * milkCounter;
+        cookiePrice = cookieData.price * cookieCounter;
 
-        float subTotalPrice = applePrice + meatPrice + milkPrice + cookiePrice;
-        float totalDiscounts = (milkData.price * milkCounter) + (meatData.price * meatCounter) * 0.5f + (cookieData.price* cookieCounter) * 2f;
-        float totalToPay = subTotalPrice - totalDiscounts;
+        subTotalPrice = applePrice + meatPrice + milkPrice + cookiePrice;
+        totalDiscounts = (milkData.price * milkCounter) + (meatData.price * meatCounter) * 0.5f + (cookieData.price* cookieCounter) * 2f;
+        totalToPay = subTotalPrice - totalDiscounts;
 
         if (isVoucherShown == true)
         {
             voucherBox.enabled = true;
             voucherText.enabled = true;
-            voucherText.text = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + applePrice + "\n" + "Leche: " + milkData.description + " - "+ milkPrice + "\n" + "Carne: " + meatData.description + " - " + meatPrice
-                + "\n" + "Galleta: " + cookieData.description + " - " + cookiePrice + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "\n" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "\n" + "$ " + totalToPay;
+            StartCoroutine("TypeWriter");
             CheckList();
             Destroy(applePFClone.gameObject);
             Destroy(meatPFClone.gameObject);
@@ -194,9 +199,9 @@ public class GameMaster : MonoBehaviour
     }
     IEnumerator TypeWriter()
     {
-        foreach (char character in npcDialogue)
+        foreach (char character in voucherItems)
         {
-            dialogueText.text += character;
+            voucherText.text += character;
             yield return new WaitForSeconds(writingSpeed);
         }
         isTypeWriterFinished = true;
