@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -9,9 +11,43 @@ public class PlayerInteract : MonoBehaviour
     public LayerMask interactionLayer;
     public int itemCounter;
 
+    private ItemPickup lookedAtItem;
+
     void Update()
     {
         Debug.DrawRay(playerCamera.position, playerCamera.forward * pickupRange, Color.red);
+
+        Ray ray = new Ray (playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast (ray, out hit, pickupRange, interactionLayer))
+        {
+            ItemPickup item = hit.transform.GetComponent<ItemPickup>();
+            if (item != null)
+            {
+                if (lookedAtItem != item)
+                {
+                    lookedAtItem = item;
+                    TooltipManager.instance.ShowTooltip(item.GetTooltipInfo());
+                }
+            }
+            else
+            {
+                if (lookedAtItem != null)
+                {
+                    TooltipManager.instance.HideTooltip();
+                    lookedAtItem = null;
+                }
+            }
+        }
+        else
+        {
+            if (lookedAtItem != null)
+            {
+                TooltipManager.instance.HideTooltip();
+                lookedAtItem = null;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (grabbedTransform != null)
