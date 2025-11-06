@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 131308993}
   - component: {fileID: 131308994}
   - component: {fileID: 131309001}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Customer 1
   m_TagString: Client
   m_Icon: {fileID: 0}
@@ -993,7 +993,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
@@ -1014,6 +1014,8 @@ MonoBehaviour:
   dialogueText: {fileID: 378562445}
   nameText: {fileID: 1515323125}
   writingSpeed: 0.01
+  isDialogueStarted: 0
+  isClientTalking: 0
   isTypeWriterFinished: 0
   list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
@@ -1022,6 +1024,8 @@ MonoBehaviour:
   wrongList: {fileID: 11400000, guid: 0814906734864c94c8bda76a6e2f770f, type: 2}
   npcDialogue: "Las frutas est\xE1n a precio normal hoy."
   isPlayerOnTrigger: 0
+  npcBehaviour: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &146941548
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,8 +2399,8 @@ MonoBehaviour:
   voucherBox: {fileID: 497044967}
   voucherText: {fileID: 1978133011}
   isVoucherShown: 0
-  appleData: {fileID: 11400000, guid: 3cef30a8fe290bd4a987983abf216264, type: 2}
-  meatData: {fileID: 11400000, guid: b7154bcdf541dbb41aafff146336225f, type: 2}
+  appleData: {fileID: 11400000, guid: 87a3da847b8419c46bcd7117ef3cb9a1, type: 2}
+  meatData: {fileID: 11400000, guid: 1431ff4a3a3437c4488e8c94a2ba1d3c, type: 2}
   milkData: {fileID: 11400000, guid: c0a61b614820d93449b33c6a89a04560, type: 2}
   cookieData: {fileID: 11400000, guid: b9d50731a3fd5534884f97f29bd020bf, type: 2}
   applePF: {fileID: 5590632401699388054, guid: d261606fb2ddaf44aaf0572a20ca63ae, type: 3}
@@ -2621,7 +2625,7 @@ GameObject:
   - component: {fileID: 555446095}
   - component: {fileID: 555446089}
   - component: {fileID: 555446096}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Customer 4
   m_TagString: Client
   m_Icon: {fileID: 0}
@@ -2800,7 +2804,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
@@ -2821,6 +2825,8 @@ MonoBehaviour:
   dialogueText: {fileID: 378562445}
   nameText: {fileID: 1515323125}
   writingSpeed: 0.01
+  isDialogueStarted: 0
+  isClientTalking: 0
   isTypeWriterFinished: 0
   list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
@@ -2829,6 +2835,8 @@ MonoBehaviour:
   wrongList: {fileID: 11400000, guid: 0814906734864c94c8bda76a6e2f770f, type: 2}
   npcDialogue: "La panaderia est\xE1 al doble de precio hoy, eso incluye las galletas..."
   isPlayerOnTrigger: 0
+  npcBehaviour: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &624099420
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,7 +3392,7 @@ GameObject:
   - component: {fileID: 862203654}
   - component: {fileID: 862203648}
   - component: {fileID: 862203655}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Customer 3
   m_TagString: Client
   m_Icon: {fileID: 0}
@@ -3563,7 +3571,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
@@ -3584,6 +3592,8 @@ MonoBehaviour:
   dialogueText: {fileID: 378562445}
   nameText: {fileID: 1515323125}
   writingSpeed: 0.01
+  isDialogueStarted: 0
+  isClientTalking: 0
   isTypeWriterFinished: 0
   list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
@@ -3592,6 +3602,8 @@ MonoBehaviour:
   wrongList: {fileID: 11400000, guid: 0814906734864c94c8bda76a6e2f770f, type: 2}
   npcDialogue: "Hoy los l\xE1cteos est\xE1n gratis."
   isPlayerOnTrigger: 0
+  npcBehaviour: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &907346395
 GameObject:
   m_ObjectHideFlags: 0
@@ -5040,6 +5052,8 @@ MonoBehaviour:
   dialogueText: {fileID: 378562445}
   nameText: {fileID: 1515323125}
   writingSpeed: 0.01
+  isDialogueStarted: 0
+  isClientTalking: 0
   isTypeWriterFinished: 0
   list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
@@ -5048,6 +5062,8 @@ MonoBehaviour:
   wrongList: {fileID: 11400000, guid: 0814906734864c94c8bda76a6e2f770f, type: 2}
   npcDialogue: AYUDA
   isPlayerOnTrigger: 0
+  npcBehaviour: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &1429475055
 GameObject:
   m_ObjectHideFlags: 0
@@ -6189,7 +6205,7 @@ GameObject:
   - component: {fileID: 1900617292}
   - component: {fileID: 1900617286}
   - component: {fileID: 1900617293}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Customer 2
   m_TagString: Client
   m_Icon: {fileID: 0}
@@ -6368,7 +6384,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
@@ -6389,6 +6405,8 @@ MonoBehaviour:
   dialogueText: {fileID: 378562445}
   nameText: {fileID: 1515323125}
   writingSpeed: 0.01
+  isDialogueStarted: 0
+  isClientTalking: 0
   isTypeWriterFinished: 0
   list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
@@ -6397,6 +6415,8 @@ MonoBehaviour:
   wrongList: {fileID: 11400000, guid: 0814906734864c94c8bda76a6e2f770f, type: 2}
   npcDialogue: Las carnes hoy tienen un 50% de descuento, excepto la humana.
   isPlayerOnTrigger: 0
+  npcBehaviour: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!1 &1939465119
 GameObject:
   m_ObjectHideFlags: 0
@@ -6599,7 +6619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

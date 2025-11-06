@@ -64,9 +64,7 @@ public class GameMaster : MonoBehaviour
 
         listText.enabled = false;
         voucherText.enabled = false;
-        voucherItems = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + applePrice + "\n" + "Leche: " + milkData.description + " - " + milkPrice + "\n" + "Carne: " + meatData.description + " - " + meatPrice
-                + "\n" + "Galleta: " + cookieData.description + " - " + cookiePrice + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "\n" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "\n" + "$ " + totalToPay;
-        //~3:30 AM. No es bueno ni pulcro, pero funciona
+
         ListRandomizer();
         switch (listType)
         {
@@ -166,14 +164,17 @@ public class GameMaster : MonoBehaviour
     }
     public void Pay() //Func gets called at checkout
     {
-        applePrice = appleData.price * appleCounter;
-        meatPrice = meatData.price * meatCounter;
-        milkPrice = milkData.price * milkCounter;
-        cookiePrice = cookieData.price * cookieCounter;
+        applePrice = appleCounter * appleData.price;
+        meatPrice = meatCounter * meatData.price;
+        milkPrice = milkCounter * milkData.price;
+        cookiePrice = cookieCounter * cookieData.price;
 
         subTotalPrice = applePrice + meatPrice + milkPrice + cookiePrice;
-        totalDiscounts = (milkData.price * milkCounter) + (meatData.price * meatCounter) * 0.5f + (cookieData.price* cookieCounter) * 2f;
+        totalDiscounts = milkPrice + (meatPrice * 0.5f) + (cookiePrice * 2f);
         totalToPay = subTotalPrice - totalDiscounts;
+
+        voucherItems = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + appleCounter + "\n" + "Leche: " + milkData.description + " - " + milkCounter + "\n" + "Carne: " + meatData.description + " - " + meatCounter
+               + "\n" + "Galleta: " + cookieData.description + " - " + cookieCounter + "\n" + "=Sub Total=" + "\n" + "$ " + subTotalPrice + "\n" + "=Descuentos=" + "\n" + "$ " + totalDiscounts + "\n" + "=A Pagar=" + "\n" + "$ " + totalToPay;
 
         if (isVoucherShown == true)
         {

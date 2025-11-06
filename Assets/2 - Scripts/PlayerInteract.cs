@@ -59,6 +59,23 @@ public class PlayerInteract : MonoBehaviour
                 TryPickupItem();
             }
         }
+
+        if (Physics.Raycast(ray, out hit, pickupRange, interactionLayer))
+        {
+            DialogueManager npcDialogue = hit.transform.GetComponent<DialogueManager>();
+            if (Input.GetKeyDown(KeyCode.E) && npcDialogue.isClientTalking == false)
+            {
+                npcDialogue.ShowBoxes();
+                npcDialogue.ClientTalk();
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && npcDialogue.isClientTalking == true)
+            {
+                npcDialogue.HideBoxes();
+                npcDialogue.isClientTalking = false;
+                npcDialogue.npcBehaviour.npcAgent.isStopped = false;
+                npcDialogue.playerMovement.moveSpeed = 5f;
+            }
+        }
     }
 
     void TryPickupItem()

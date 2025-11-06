@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Conversation Flow")]
     public float writingSpeed;
-    bool isDialogueStarted, isClientTalking;
+    [HideInInspector] public bool isDialogueStarted, isClientTalking;
     [SerializeField] bool isTypeWriterFinished;
     int dialogueIndex;
 
@@ -29,8 +29,8 @@ public class DialogueManager : MonoBehaviour
     [Header("Detection")]
     [SerializeField] bool isPlayerOnTrigger;
 
-    NPCBehaviour npcBehaviour;
-    PlayerMovement playerMovement;
+    [HideInInspector] public NPCBehaviour npcBehaviour;
+    [HideInInspector] public PlayerMovement playerMovement;
     SceneMaster sceneMaster;
     #endregion
 
@@ -65,21 +65,6 @@ public class DialogueManager : MonoBehaviour
                 else
                 {
                     BossTalk();
-                }
-            }
-            else if (gameObject.CompareTag("Client"))
-            {
-                if(isClientTalking == false)
-                {
-                    ShowBoxes();
-                    ClientTalk();
-                }
-                else if (isClientTalking == true)
-                {
-                    HideBoxes();
-                    isClientTalking = false;
-                    npcBehaviour.npcAgent.isStopped = false;
-                    playerMovement.moveSpeed = 5f;
                 }
             }
         }
@@ -178,7 +163,7 @@ public class DialogueManager : MonoBehaviour
             isDialogueStarted = true;
         }
     }
-    void ClientTalk()
+    public void ClientTalk()
     {
         npcBehaviour.npcAgent.isStopped = true;
         playerMovement.moveSpeed = 0f;
