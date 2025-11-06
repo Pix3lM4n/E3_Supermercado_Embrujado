@@ -48,19 +48,17 @@ public class DialogueManager : MonoBehaviour
     {
         if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E))
         {
-            if (gameObject.CompareTag("Boss")) //Checks for either boss or client
+            if (gameObject.CompareTag("Boss"))
             {
                 if (GameMaster.Instance.isListCorrect == 1)
                 {
                     GameMaster.Instance.listType = 4;
                     BossTalk();
-                    sceneMaster.ChangeScene(GameMaster.Instance.isListCorrect);
                 }
                 else if (GameMaster.Instance.isListCorrect == 2)
                 {
                     GameMaster.Instance.listType = 5;
                     BossTalk();
-                    sceneMaster.ChangeScene(GameMaster.Instance.isListCorrect);
                 }
                 else
                 {
@@ -133,6 +131,8 @@ public class DialogueManager : MonoBehaviour
                     }
                     else //No more dialogue
                     {
+                        sceneMaster.sceneToLoad = GameMaster.Instance.isListCorrect;
+                        sceneMaster.ChangeScene();
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
@@ -147,6 +147,8 @@ public class DialogueManager : MonoBehaviour
                     }
                     else //No more dialogue
                     {
+                        sceneMaster.sceneToLoad = GameMaster.Instance.isListCorrect;
+                        sceneMaster.ChangeScene();
                         HideBoxes();
                         dialogueIndex = 0;
                         isDialogueStarted = false;
@@ -209,13 +211,4 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = null;
         nameText.text = null;
     }
-    //IEnumerator TypeWriter()
-    //{
-    //    foreach (char character in npcDialogue)
-    //    {
-    //        dialogueText.text += character;
-    //        yield return new WaitForSeconds(writingSpeed);
-    //    }
-    //    isTypeWriterFinished = true;
-    //}
 }

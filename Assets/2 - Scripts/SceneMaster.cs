@@ -1,21 +1,39 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneMaster : MonoBehaviour
 {
-    public void StartGame()
+    public int sceneToLoad;
+    public TextMeshProUGUI endScreenBox;
+    [TextArea] public string victoryText, defeatText;
+
+    private void Start()
     {
-        SceneManager.LoadScene("Martin");
+        Cursor.lockState = CursorLockMode.None;
+        sceneToLoad = GameMaster.Instance.isListCorrect;
+        if (sceneToLoad == 1)
+        {
+            endScreenBox.text = victoryText;
+        }
+        else if (sceneToLoad == 2)
+        {
+            endScreenBox.text = defeatText;
+        }
+    }
+    public void StartGame(string gameScene)
+    {
+        SceneManager.LoadScene(gameScene);
         print("Game Started");
     }
-    public void ChangeScene(int sceneToLoad)
+    public void ChangeScene()
     {
-        if (sceneToLoad == 1)
+        if (sceneToLoad == 1) //Win
         {
             SceneManager.LoadScene("EndScreen");
             print("Win");
         }
-        else if (sceneToLoad == 2)
+        else if (sceneToLoad == 2) //Lose
         {
             SceneManager.LoadScene("EndScreen");
             print("Lose");

@@ -1656,14 +1656,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273232489}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.11, y: 1, z: -22.62}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -23.14, y: 1, z: -22.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1982778726}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &273232497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2423,6 +2423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b856042695256c640a7ac1aad13558b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endScreenBox: {fileID: 378562445}
+  victoryText: a
+  defeatText: b
 --- !u!114 &463145112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5055,7 +5058,7 @@ MonoBehaviour:
   isDialogueStarted: 0
   isClientTalking: 0
   isTypeWriterFinished: 0
-  list1Dialogue: {fileID: 11400000, guid: 28de446e4f51d8c45a495e7b118898c6, type: 2}
+  list1Dialogue: {fileID: 11400000, guid: 85dbb15d1adf822498df5e3bcda451b1, type: 2}
   list2Dialogue: {fileID: 11400000, guid: 0585246771ca9eb4e9c5b70f81e26924, type: 2}
   list3Dialogue: {fileID: 11400000, guid: 4d7a4ad11a049424b9dd02aae484e3fd, type: 2}
   correctList: {fileID: 11400000, guid: 9516ecf60390ecb4b8043df6db578d70, type: 2}

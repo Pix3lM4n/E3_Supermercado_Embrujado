@@ -69,13 +69,13 @@ public class GameMaster : MonoBehaviour
         switch (listType)
         {
             case 1:
-                listText.text = "Manzana" + "\n" + "Carne x3" + "\n" + "Leche";
+                listText.text = "Manzana Agusanada" + "\n" + "Carne Podrida x3" + "\n" + "Leche Cortada";
                 break;
             case 2:
-                listText.text = "Manzana x2" + "\n" + "Carne" + "\n" + "Leche x3" + "\n" + "Galleta";
+                listText.text = "Manzana Agusanada x2" + "\n" + "Carne Podrida" + "\n" + "Leche Cortada x3" + "\n" + "Galleta Tiesa";
                 break;
             case 3:
-                listText.text = "Manzana x3";
+                listText.text = "Manzana Agusanada x3";
                 break;
         }
 
@@ -101,7 +101,7 @@ public class GameMaster : MonoBehaviour
         }
         if (isTypeWriterFinished == true)
         {
-            StopCoroutine("TypWriter");
+            StopCoroutine("TypeWriter");
         }
     }
     public void RespawnItem(string itemTag)
@@ -169,8 +169,8 @@ public class GameMaster : MonoBehaviour
         milkPrice = milkCounter * milkData.price;
         cookiePrice = cookieCounter * cookieData.price;
 
-        subTotalPrice = applePrice + meatPrice + milkPrice + cookiePrice;
-        totalDiscounts = milkPrice + (meatPrice * 0.5f) + (cookiePrice * 2f);
+        subTotalPrice = applePrice + meatPrice + milkPrice + (cookiePrice * 2f);
+        totalDiscounts = milkPrice + (meatPrice * 0.5f);
         totalToPay = subTotalPrice - totalDiscounts;
 
         voucherItems = "=Articulos=" + "\n" + "Manzana: " + appleData.description + " - " + appleCounter + "\n" + "Leche: " + milkData.description + " - " + milkCounter + "\n" + "Carne: " + meatData.description + " - " + meatCounter
