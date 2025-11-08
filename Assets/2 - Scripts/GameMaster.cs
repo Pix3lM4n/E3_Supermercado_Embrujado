@@ -79,10 +79,10 @@ public class GameMaster : MonoBehaviour
                 break;
         }
 
-        applePFClone = Instantiate(applePF, appleSpawn);
-        meatPFClone = Instantiate(meatPF, meatSpawn);
-        milkPFClone = Instantiate(milkPF, milkSpawn);
-        cookiePFClone = Instantiate(cookiePF, cookieSpawn);
+        //applePFClone = Instantiate(applePF, appleSpawn);
+        //meatPFClone = Instantiate(meatPF, meatSpawn);
+        //milkPFClone = Instantiate(milkPF, milkSpawn);
+        //cookiePFClone = Instantiate(cookiePF, cookieSpawn);
     }
     private void Update()
     {

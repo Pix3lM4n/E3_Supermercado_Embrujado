@@ -6670,10 +6670,10 @@ MonoBehaviour:
   meatData: {fileID: 11400000, guid: 1431ff4a3a3437c4488e8c94a2ba1d3c, type: 2}
   milkData: {fileID: 11400000, guid: c0a61b614820d93449b33c6a89a04560, type: 2}
   cookieData: {fileID: 11400000, guid: b9d50731a3fd5534884f97f29bd020bf, type: 2}
-  applePF: {fileID: 5590632401699388054, guid: d261606fb2ddaf44aaf0572a20ca63ae, type: 3}
+  applePF: {fileID: 7711825394073895313, guid: 0718c8b31df11bd408bffcfd3729b04a, type: 3}
   meatPF: {fileID: 1011158907165738732, guid: 41ffe1a739b405340b5067d816dda9b3, type: 3}
-  milkPF: {fileID: 912465476400257304, guid: 6a5dd09eda0810046adba5ccd82b16fc, type: 3}
-  cookiePF: {fileID: 4343331678719903732, guid: 345bbda95ee4b7c4bb558f7a65d44fce, type: 3}
+  milkPF: {fileID: 8449134456902389630, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+  cookiePF: {fileID: 1012311386055193492, guid: db66b66f761249347b45ef948710e295, type: 3}
   appleSpawn: {fileID: 525597434}
   meatSpawn: {fileID: 25319720}
   milkSpawn: {fileID: 1883912872}
@@ -11897,6 +11897,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008783120}
   m_CullTransparentMesh: 1
+--- !u!1001 &1009781920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8449134456902389630, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_Name
+      value: Leche PH
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.060496
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2500021
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.00528
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9082225158417962436, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb323cb6688d54249b6a030872eb489c, type: 3}
 --- !u!1 &1024292724
 GameObject:
   m_ObjectHideFlags: 0
@@ -24616,3 +24673,4 @@ SceneRoots:
   - {fileID: 227138581}
   - {fileID: 1975276095}
   - {fileID: 1974275868}
+  - {fileID: 1009781920}
