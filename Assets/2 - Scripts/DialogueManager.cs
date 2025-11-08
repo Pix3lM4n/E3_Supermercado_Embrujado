@@ -129,7 +129,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueIndex++;
                         RefreshText();
                     }
-                    else //No more dialogue
+                    else
                     {
                         sceneMaster.sceneToLoad = GameMaster.Instance.isListCorrect;
                         sceneMaster.ChangeScene();
@@ -157,7 +157,7 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
-        else //First dialogue
+        else
         {
             playerMovement.moveSpeed = 0f;
             ShowBoxes();
