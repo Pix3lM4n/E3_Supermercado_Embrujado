@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: f045dc733058d1f419b23dd9fa3081fa
+AssetOrigin:
+  serializedVersion: 1
+  productId: 338852
+  packageName: Animated triceratops skeleton
+  packageVersion: 1.0
+  assetPath: Assets/Zacxophone/Triceratops_Skeleton/Meshes/Triceratops_Skeleton.fbx
+  uploadId: 802918
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -129,7 +136,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -279,10 +286,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 338852
-  packageName: Animated triceratops skeleton
-  packageVersion: 1.0
-  assetPath: Assets/Zacxophone/Triceratops_Skeleton/Meshes/Triceratops_Skeleton.fbx
-  uploadId: 802918
