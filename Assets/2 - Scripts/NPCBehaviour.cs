@@ -7,7 +7,7 @@ public class NPCBehaviour : MonoBehaviour
     [HideInInspector] public NavMeshAgent npcAgent;
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] NPC_STATE currentState;
-    //Animator npcAnim;
+    public Animator npcAnim;
     public float walkingSpeed;
 
     public enum NPC_STATE
@@ -25,7 +25,7 @@ public class NPCBehaviour : MonoBehaviour
     private void Awake()
     {
         npcAgent = GetComponent<NavMeshAgent>();
-        //npcAnim = GetComponent<Animator>();
+        npcAnim = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -42,6 +42,9 @@ public class NPCBehaviour : MonoBehaviour
                 {
                     elapsedIdleTime = 0;
                     ChangeState(NPC_STATE.Walking);
+                    npcAnim.SetBool("IsIdle", false);
+                    npcAnim.SetBool("IsWalking", true);
+
                 }
                 break;
 
@@ -49,6 +52,8 @@ public class NPCBehaviour : MonoBehaviour
                 if (npcAgent.remainingDistance <= npcAgent.stoppingDistance)
                 {
                     currentState = NPC_STATE.Idle;
+                    npcAnim.SetBool("IsIdle", true);
+                    npcAnim.SetBool("IsWalking", false);
                 }
                 break;
         }

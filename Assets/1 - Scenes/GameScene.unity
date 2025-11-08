@@ -8219,6 +8219,7 @@ MonoBehaviour:
   - {fileID: 1334638912}
   - {fileID: 828930656}
   currentState: 0
+  npcAnim: {fileID: 0}
   walkingSpeed: 2
   idleTime: 0
   minMaxIdleTime: {x: 1, y: 4}
@@ -8325,7 +8326,7 @@ Transform:
   m_GameObject: {fileID: 555446087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.57, y: 1.28, z: 19.08}
+  m_LocalPosition: {x: -5.82, y: 1.28, z: -24.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12016,6 +12017,7 @@ MonoBehaviour:
   - {fileID: 1334638912}
   - {fileID: 828930656}
   currentState: 0
+  npcAnim: {fileID: 0}
   walkingSpeed: 2
   idleTime: 0
   minMaxIdleTime: {x: 1, y: 4}
@@ -12122,7 +12124,7 @@ Transform:
   m_GameObject: {fileID: 862203646}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.78, y: 1.28, z: -0.49}
+  m_LocalPosition: {x: -16.78, y: 1.28, z: -24.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23775,6 +23777,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 179894, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
   m_PrefabInstance: {fileID: 516101996}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1679176797 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9530184, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
+  m_PrefabInstance: {fileID: 516101996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!65 &1679176799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23846,6 +23853,7 @@ MonoBehaviour:
   - {fileID: 1334638912}
   - {fileID: 828930656}
   currentState: 0
+  npcAnim: {fileID: 1679176797}
   walkingSpeed: 2
   idleTime: 0
   minMaxIdleTime: {x: 1, y: 4}
@@ -26182,6 +26190,7 @@ MonoBehaviour:
   - {fileID: 1334638912}
   - {fileID: 828930656}
   currentState: 0
+  npcAnim: {fileID: 0}
   walkingSpeed: 2
   idleTime: 0
   minMaxIdleTime: {x: 1, y: 4}
@@ -26288,7 +26297,7 @@ Transform:
   m_GameObject: {fileID: 1900617284}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.15, y: 1.28, z: 15.84}
+  m_LocalPosition: {x: 10.15, y: 1.28, z: -27.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
