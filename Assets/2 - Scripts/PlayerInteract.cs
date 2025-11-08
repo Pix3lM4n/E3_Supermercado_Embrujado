@@ -88,7 +88,7 @@ public class PlayerInteract : MonoBehaviour
             if (itemCounter < 10)
             {
                 itemCounter++;
-                GameMaster.Instance.RespawnItem(item.gameObject.tag);
+                //GameMaster.Instance.RespawnItem(item.gameObject.tag);
             }
 
             if (item != null)
