@@ -75,7 +75,7 @@ public class DialogueManager : MonoBehaviour
     {
         isPlayerOnTrigger = false;
     }
-    void BossTalk() //~4:00 AM. No es lo que queria, pero funciona
+    void BossTalk()
     {
         if (isDialogueStarted == true)
         {
@@ -87,7 +87,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueIndex++;
                         RefreshText();
                     }
-                    else //No more dialogue
+                    else 
                     {
                         HideBoxes();
                         dialogueIndex = 0;
@@ -101,7 +101,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueIndex++;
                         RefreshText();
                     }
-                    else //No more dialogue
+                    else
                     {
                         HideBoxes();
                         dialogueIndex = 0;
@@ -115,7 +115,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueIndex++;
                         RefreshText();
                     }
-                    else //No more dialogue
+                    else
                     {
                         HideBoxes();
                         dialogueIndex = 0;
@@ -145,7 +145,7 @@ public class DialogueManager : MonoBehaviour
                         dialogueIndex++;
                         RefreshText();
                     }
-                    else //No more dialogue
+                    else
                     {
                         sceneMaster.sceneToLoad = GameMaster.Instance.isListCorrect;
                         sceneMaster.ChangeScene();
