@@ -126,7 +126,7 @@ public class GameMaster : MonoBehaviour
                 break;
         }
     }
-    void CheckList() //Use with cart script to check how many items there are
+    void CheckList()
     {
         switch (listType)
         {
