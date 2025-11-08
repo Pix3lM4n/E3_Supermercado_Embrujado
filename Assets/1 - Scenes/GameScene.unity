@@ -6671,7 +6671,7 @@ MonoBehaviour:
   milkData: {fileID: 11400000, guid: c0a61b614820d93449b33c6a89a04560, type: 2}
   cookieData: {fileID: 11400000, guid: b9d50731a3fd5534884f97f29bd020bf, type: 2}
   applePF: {fileID: 5590632401699388054, guid: d261606fb2ddaf44aaf0572a20ca63ae, type: 3}
-  meatPF: {fileID: 5492560849886723078, guid: 6164785836cfe8b4385a04ab2740c025, type: 3}
+  meatPF: {fileID: 1011158907165738732, guid: 41ffe1a739b405340b5067d816dda9b3, type: 3}
   milkPF: {fileID: 912465476400257304, guid: 6a5dd09eda0810046adba5ccd82b16fc, type: 3}
   cookiePF: {fileID: 4343331678719903732, guid: 345bbda95ee4b7c4bb558f7a65d44fce, type: 3}
   appleSpawn: {fileID: 525597434}

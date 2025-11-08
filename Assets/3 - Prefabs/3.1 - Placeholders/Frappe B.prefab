@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7850586434602842404}
   - component: {fileID: 7715840121130487941}
   - component: {fileID: 1235217519596786929}
+  - component: {fileID: -7125891527114704694}
   m_Layer: 0
   m_Name: Frappe B
   m_TagString: Untagged
@@ -176,3 +177,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: c0a61b614820d93449b33c6a89a04560, type: 2}
   isInCart: 0
+--- !u!114 &-7125891527114704694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449134456902389630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
