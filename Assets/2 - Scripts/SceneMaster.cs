@@ -6,6 +6,9 @@ public class SceneMaster : MonoBehaviour
 {
     public int sceneToLoad;
     public TextMeshProUGUI endScreenBox;
+    public Canvas canvas;
+    public AudioSource victorySound;
+    public AudioSource loseSound;
     [TextArea] public string victoryText, defeatText;
 
     private void Start()
@@ -15,10 +18,12 @@ public class SceneMaster : MonoBehaviour
         if (sceneToLoad == 1)
         {
             endScreenBox.text = victoryText;
+            victorySound.Play();
         }
         else if (sceneToLoad == 2)
         {
             endScreenBox.text = defeatText;
+            loseSound.Play();
         }
     }
     public void StartGame(string gameScene)

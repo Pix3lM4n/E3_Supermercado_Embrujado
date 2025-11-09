@@ -10,6 +10,8 @@ public class PlayerInteract : MonoBehaviour
     public Transform playerHands;
     public LayerMask interactionLayer;
     public int itemCounter;
+    public AudioSource grabSound;
+    public AudioSource freeSound;
 
     private ItemPickup lookedAtItem;
 
@@ -104,6 +106,7 @@ public class PlayerInteract : MonoBehaviour
         grabbedTransform.SetParent(playerHands);
         grabbedTransform.localPosition = Vector3.zero;
         grabbedTransform.GetComponent<Rigidbody>().isKinematic = true;
+        grabSound.Play();
     }
 
     void ReleaseTransform()
@@ -111,5 +114,6 @@ public class PlayerInteract : MonoBehaviour
         grabbedTransform.GetComponent<Rigidbody>().isKinematic = false;
         grabbedTransform.SetParent(null);
         grabbedTransform = null;
+        freeSound.Play();
     }
 }

@@ -4,6 +4,7 @@ public class TillScript : MonoBehaviour
 {
     [SerializeField] bool isPlayerOnTrigger;
     PlayerMovement playerMovement;
+    public AudioSource zipSound;
 
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class TillScript : MonoBehaviour
     {
         if (isPlayerOnTrigger == true && Input.GetKeyDown(KeyCode.E))
         {
+            zipSound.Play();
             print("Show voucher");
             playerMovement.moveSpeed = 0f;
             GameMaster.Instance.isVoucherShown = true;
@@ -25,6 +27,7 @@ public class TillScript : MonoBehaviour
             playerMovement.moveSpeed = 5f;
             GameMaster.Instance.isVoucherShown = false;
             GameMaster.Instance.Pay();
+            zipSound.Play();
         }
     }
     private void OnTriggerEnter(Collider other)
